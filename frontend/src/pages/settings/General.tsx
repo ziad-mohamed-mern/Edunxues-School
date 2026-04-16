@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import {
-  School,
+  GraduationCap,
   Globe,
   Bell,
   Moon,
@@ -67,7 +67,7 @@ export default function GeneralSettings() {
         <Card className="lg:col-span-2">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <School className="h-5 w-5 text-primary" />
+              <GraduationCap className="h-5 w-5 text-primary" />
               <CardTitle>School Profile</CardTitle>
             </div>
             <CardDescription>
