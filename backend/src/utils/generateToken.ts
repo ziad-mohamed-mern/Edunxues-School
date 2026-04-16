@@ -10,9 +10,8 @@ export const generateToken = (userId: string, res: Response) => {
   // attach token to http-only cookie
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    secure: true, // must be true for sameSite: "none"
+    sameSite: "none", // required for cross-origin (localhost frontend -> railway backend)
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    path: "/", // cookie valid for entire site
   });
 };
