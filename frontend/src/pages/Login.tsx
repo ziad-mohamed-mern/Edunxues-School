@@ -3,6 +3,9 @@ import { useAuth } from "@/hooks/AuthProvider";
 import { School } from "lucide-react";
 import { Link, Navigate } from "react-router";
 
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Info } from "lucide-react";
+
 const Login = () => {
   const { user, loading } = useAuth();
   if (user && !loading) {
@@ -19,8 +22,24 @@ const Login = () => {
             Edunexus.
           </Link>
         </div>
-        <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-xs">
+        <div className="flex flex-1 items-center justify-center relative">
+          <div className="w-full max-w-sm space-y-6">
+            <div className="flex flex-col space-y-2 text-center">
+              <h1 className="text-2xl font-semibold tracking-tight">Login to Dashboard</h1>
+              <p className="text-sm text-muted-foreground">
+                Enter your credentials to access your account
+              </p>
+            </div>
+            
+            <Alert variant="default" className="bg-blue-50/50 text-blue-900 border-blue-200 dark:bg-blue-950/50 dark:text-blue-200 dark:border-blue-900">
+              <Info className="h-4 w-4" />
+              <AlertDescription className="ml-2">
+                <span className="block font-medium mb-1">Demo Credentials:</span>
+                Email: <strong>admin@edunexus.com</strong><br/>
+                Password: <strong>password123</strong>
+              </AlertDescription>
+            </Alert>
+
             <UniversalUserForm type="login" />
           </div>
         </div>
