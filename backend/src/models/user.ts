@@ -1,20 +1,20 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 
-export enum UserRole {
-  ADMIN = "admin",
-  TEACHER = "teacher",
-  STUDENT = "student",
-  PARENT = "parent",
-}
+export const UserRole = {
+  ADMIN: "admin",
+  TEACHER: "teacher",
+  STUDENT: "student",
+  PARENT: "parent",
+} as const;
 
-export type userRoles = "admin" | "teacher" | "student" | "parent";
+export type UserRole = (typeof UserRole)[keyof typeof UserRole];
 
 export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  role: userRoles;
+  role: UserRole;
   isActive: boolean;
   studentClass?: string | null;
   teacherSubject?: string[] | null;
