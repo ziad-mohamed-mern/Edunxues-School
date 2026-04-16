@@ -50,9 +50,28 @@ if (process.env.STAGE === "development") {
 
 // cross-origin resource sharing (CORS) middleware
 // credentials: true allows cookies to be sent with requests
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://edunxues-school-17yl.vercel.app"
+];
+
+// If there are additional origins in the CLIENT_URL env var, add them
+if (process.env.CLIENT_URL) {
+  const envOrigins = process.env.CLIENT_URL.split(",").map(url => url.trim());
+  allowedOrigins.push(...envOrigins);
+}
+
 app.use(
   cors({
-    origin: CLIENT_URL,
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps or curl requests)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
